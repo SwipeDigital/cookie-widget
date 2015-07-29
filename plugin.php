@@ -49,16 +49,19 @@ class TheSwipeCookieWidget {
 	function forfooter() {
 		$options = get_option('Cookie_settings');
 		
-		if ($options['infolink'] !== NULL) {
-			$infolink = $options['infolink'];
-			$shortcode = "[cookie-jar infolink='".$infolink."']";
-		} else {
-			$shortcode = "[cookie-jar]";
-		}
-		echo "\n<!-- BEGIN: Cookie Compliance, by Swipe Digital - http://swipe.digital -->\n";
-	    echo do_shortcode($shortcode);
-		echo "\n<!-- END: Cookie Compliance, by Swipe Digital - http://swipe.digital -->\n\n";
-
+		if ($options['cookieoff']!=1):
+			if ($options['infolink'] !== NULL) {
+				$infolink = $options['infolink'];
+				$shortcode = "[cookie-jar infolink='".$infolink."']";
+			} else {
+				$shortcode = "[cookie-jar]";
+			}
+			echo "\n<!-- ".$options['cookieoff']." BEGIN: Cookie Compliance, by Swipe Digital - http://swipe.digital -->\n";
+		    echo do_shortcode($shortcode);
+			echo "\n<!-- END: Cookie Compliance, by Swipe Digital - http://swipe.digital -->\n\n";
+		else:
+			echo "\n<!-- Swipe Digital Cookie Code is off for automatically adding to the footer! -->";
+		endif;
 	}
 	
 	
@@ -91,7 +94,7 @@ class TheSwipeCookieWidget {
 		
 		add_settings_field(
 			'Cookieoncheckbox',
-			__( 'Automatically add to footer', 'swipedigital'),
+			__( 'Don\'t automatically add to footer', 'swipedigital'),
 			array($this, 'Cookie_checkbox_render'),
 			'pluginPage',
 			'Cookie_pluginPage_section'
@@ -102,14 +105,14 @@ class TheSwipeCookieWidget {
 	
 	function Cookie_checkbox_render() {
 		$options = get_option('Cookie_settings');
-		if (isset($options['cookieon']) && $options['cookieon']==1) :
-			$check = "checked=\"checked\" ";
+		if (isset($options['cookieoff']) && $options['cookieoff']==1) :
+			$checked = "checked=\"checked\" ";
 		else:
 			$checked = "";
 		endif;
 		?>
-		<input type="checkbox" name="Cookie_settings[cookieon]" value="1" <?php echo $checked; ?>/>
-		<span class="help-text">If this is on the widget will automatically display in your footer. If it is off, you can choose which pages to display it on by adding <code>[cookie-jar]</code> to your pages</span>
+		<input type="checkbox" name="Cookie_settings[cookieoff]" value="1" <?php echo $checked; ?>/>
+		<span class="help-text">Mark this if you wish to control the display of the cookie bar on a per page basis (by adding the <code>[cookie-jar]</code> shortcode on each page you want to include it on). If this checkbox is un-ticked the cookie warning will show in the footer of every page of your site.</span>
 		<?php
 	}
 	function Cookie_text_field_0_render(  ) { 
