@@ -20,7 +20,7 @@ Change the settings by clicking the  menu item that can now be found underneath 
 
 ### Frequently Asked Questions ###
 ####I like this but can I get it without the Swipe Digital logo on?####
-Yes, you just need to contact us. There might be an extra charge associated with us supplying you a product without any of our branding on.
+Yes, you just need to [contact us](mailto:support@swipe.digital). There might be an extra charge associated with us supplying you a product without any of our branding on.
 
 ### Changelog ###
 #### 1.1 ####
