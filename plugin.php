@@ -1,12 +1,14 @@
 <?php
 /*
-Plugin Name: Swipe Cookie Widget
+Plugin Name: Swipe's Cookie Widget
 Plugin URI: http://tools.swipe.digital/cookie-widget
-Description: A one click install of Swipe's Cookie Widget.
-Author: Fred Bradley <fred@swipe.digital>
-Version: 1.0
-Author URI: http://swipe.digital
+Description: A one click install of Swipe's Cookie Widget, a bar showing cookie compliance at the bottom of your website.
+Author: swipe.digital <fred@swipe.digital>
+Version: 1.1
+Author URI: http://www.swipe.digital
 */
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
 class TheSwipeCookieWidget { 
 	public $options;
 	
@@ -14,8 +16,10 @@ class TheSwipeCookieWidget {
 		add_action( 'admin_menu', array($this, 'Cookie_add_admin_menu' ));
 		add_action( 'admin_init', array($this, 'Cookie_settings_init' ));
 		add_action( 'wp_footer', array($this, 'forfooter' ));
-		add_shortcode('cookie-jar', array($this, 'shortcode_cookie_jar'));
+		add_shortcode( 'cookie-jar', array($this, 'shortcode_cookie_jar' ));
+		add_action( 'admin_init', array($this, 'init' ));
 	}
+	
 	
 	function shortcode_cookie_jar($atts, $content = null) {
 		$a = shortcode_atts(array(
@@ -64,12 +68,17 @@ class TheSwipeCookieWidget {
 		endif;
 	}
 	
-	
+	function init() {
+		wp_register_style('myPluginStylesheet', plugins_url('style.css', __FILE__));
+	}
 	function Cookie_add_admin_menu(  ) { 
 	
-		add_submenu_page( 'options-general.php', 'Swipe Cookie Widget', 'Swipe Cookie Widget', 'manage_options', 'swipecookiewidget', array($this, 'Cookie_options_page') );
+		$page = add_submenu_page( 'options-general.php', 'Swipe Cookie Widget', 'Swipe Cookie Widget', 'manage_options', 'swipecookiewidget', array($this, 'Cookie_options_page') );
+	add_action('admin_print_styles-'.$page, array($this,'my_plugin_admin_styles'));
 	
-	
+	}
+	function my_plugin_admin_styles() {
+		wp_enqueue_style('myPluginStylesheet');
 	}
 	
 	
@@ -136,62 +145,13 @@ class TheSwipeCookieWidget {
 	function Cookie_options_page(  ) { 
 	
 		?>
-		<style>
-			.sidebar {
-				float:right;
-				background: #fff;
-				padding:20px;
-				width:25%;
-			}
-			.main_col {
-				background:#fff;
-				padding:20px;
-				width:80%;
-				float: left;
-			}
-			.sidebar img {
-				max-width: 100%;
-			}
-			.columns {
-				margin-right:300px;
-			}
-			.columns .sidebar {
-				margin-right:-300px;
-			}
-			.columns .main_col {
-				float:left;
-			}
-			.center {
-				margin: auto;
-				text-align: center;
-				display: block;
-			}
-			@media (max-width:768px) {
-				.main_col {
-					width:auto;
-				}
-				.columns {
-					margin:0px;
-					clear:both;
-				}
-				.columns .sidebar {
-					margin:0px;
-					margin-top:20px;
-					clear:both;
-					padding:0px;
-									width: 100%;
 
-				}
-			}
-			
-		</style>
 		
 		<div class="wrap">
-			<div class="columns">
 				<h2>Swipe Cookie Widget Settings</h2>
-
-				<div class="main_col">
-					<form action='options.php' method='post'>
+				<div class="section group">
+					<div class="col span_8_of_12">
+						<form action='options.php' method='post'>
 					
 					<?php
 					settings_fields( 'pluginPage' );
@@ -200,19 +160,28 @@ class TheSwipeCookieWidget {
 					?>
 					
 					</form>
-				</div>
-				<div class="sidebar">
-					<a class="center" href="http://swipe.digital">
-						<img src="http://swipe.digital/wp-content/uploads/2015/06/swipe_logo_site1.png" class="center" />
-					</a>
-					<p>European laws require that digital publishers give visitors to their sites and apps information about their use of cookies and other forms of local storage. In many cases these laws also require that consent be obtained.</p>
+
+					</div>
+					<div class="col span_4_of_12">
+						<div class="sidebar-block">
+							<a class="center" href="http://swipe.digital">
+								<img src="http://swipe.digital/wp-content/uploads/2015/06/swipe_logo_site1.png" class="center" />
+							</a>
+							<h3>About Swipe Digital</h3>
+							<p>Swipe Digital is a fresh & innovative online agency working with brands and events to produce great websites & applications.</p><p>Support: <a href="http://support.swipe.digital" target="_blank">http://support.swipe.digital</a></p>
+							<h3>About this plugin</h3>
+							<p>European laws require that digital publishers give visitors to their sites and apps information about their use of cookies and other forms of local storage. In many cases these laws also require that consent be obtained.</p>
 
 <p>Swipe Digital have created a helpful snippet of code that will automatically place a bar at the bottom of your site informing visitors of the use of Cookies. When a user clicks "OK", a cookie is set for 90 days and the bar disappears for that time.</p>
 
 <p>Use of this plugin is free. If you require an unbranded version of this plugin, please feel free get in contact with the developer.</p>
-				</div>
+<p>Further reading:</p>
+<blockquote><ul><li><a href="https://wiki.openrightsgroup.org/wiki/UK_Cookie_Law#Consent" target="_blank">https://wiki.openrightsgroup.org/wiki/UK_Cookie_Law#Consent</a></li></ul></blockquote>
+					</div>
+	
+				</div></div>
+				
 			</div>
-		</div>
 		<?php
 	
 	}
