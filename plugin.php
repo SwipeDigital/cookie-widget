@@ -169,6 +169,8 @@ class TheSwipeCookieWidget {
 							</a>
 							<h3>About Swipe Digital</h3>
 							<p>Swipe Digital is a fresh & innovative online agency working with brands and events to produce great websites & applications.</p><p>Support: <a href="http://support.swipe.digital" target="_blank">http://support.swipe.digital</a></p>
+						</div>
+						<div class="sidebar-block">
 							<h3>About this plugin</h3>
 							<p>European laws require that digital publishers give visitors to their sites and apps information about their use of cookies and other forms of local storage. In many cases these laws also require that consent be obtained.</p>
 
