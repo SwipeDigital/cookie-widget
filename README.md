@@ -1,13 +1,4 @@
-# cookie-widget
-
-Developed by Swipe Digital <http://swipe.digital>
-
-##Swipe's Cookie Widget for Wordpress##
-* Contributors: 
-* Tags: cookies, cookie
-* Requires at least: 3.0.0
-* Tested up to: 4.2.3
-* Stable tag: 4.2.3
+# Swipe Digital's Cookie Widget for Wordpress #
 
 A quick an easy one click install of an EU Cookie Law compliant banner.
 
