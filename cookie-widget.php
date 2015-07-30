@@ -7,7 +7,7 @@ Author: swipe.digital <fred@swipe.digital>
 Version: 1.2.0
 Author URI: http://www.swipe.digital
 GitHub Plugin URI: SwipeDigital/cookie-widget
-Github Brance:	master
+Github Branch:	master
 */
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
