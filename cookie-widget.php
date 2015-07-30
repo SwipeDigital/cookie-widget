@@ -6,7 +6,7 @@ Description: A one click install of Swipe's Cookie Widget, a bar showing cookie 
 Author: swipe.digital <fred@swipe.digital>
 Version: 1.2.0
 Author URI: http://www.swipe.digital
-GitHub Plugin URI: SwipeDigital/cookie-widget
+GitHub Plugin URI: https://github.com/SwipeDigital/cookie-widget
 Github Branch:	master
 */
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
