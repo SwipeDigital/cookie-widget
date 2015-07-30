@@ -4,7 +4,7 @@ Plugin Name: Swipe's Cookie Widget
 Plugin URI: http://tools.swipe.digital/cookie-widget
 Description: A one click install of Swipe's Cookie Widget, a bar showing cookie compliance at the bottom of your website.
 Author: swipe.digital <fred@swipe.digital>
-Version: 1.2.0
+Version: 1.2.1
 Author URI: http://www.swipe.digital
 GitHub Plugin URI: https://github.com/SwipeDigital/cookie-widget
 Github Branch:	master
